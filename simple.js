@@ -25,4 +25,18 @@ $(document).ready(function(){
             .openOn(mymap);
     }
     mymap.on('click', onMapClick);
+
+    function onLocationFound(e){
+      var radius = e.accuracy/2;
+      L.marker(e.latlng).addTo(map)
+        .bindPopup("you are within "+ radius + " meters from this point<br/>" +
+        "Coordinadtes: " + e.latlng.toString())
+        .openPopup();
+      L.circle(e.latlng, radius).addTp(map);
+    }
+    mymap.on('locationFound', onLocationFound);
+    function onLocationError(e){
+      alert(e.message);
+    }
+    mymap.on('locationerror', onLocationError);
 });
