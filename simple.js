@@ -11,4 +11,18 @@ $(document).ready(function(){
     L.marker([40.2838, -3.8215]).addTo(mymap)
     .bindPopup('<a href=http://www.etsit.urjc.es">ETSIT</a>(<a href="http://www.urjc.es">URJC</a>)')
     .openPopup();
+
+    //function onMapClick(e) {
+    //  alert("You clicked the map at " + e.latlng);
+    //}
+    //mymap.on('click', onMapClick);
+
+    var popup = L.popup();
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("You clicked the map at " + e.latlng.toString())
+            .openOn(mymap);
+    }
+    mymap.on('click', onMapClick);
 });
